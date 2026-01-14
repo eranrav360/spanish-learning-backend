@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import lessonsRouter from './routes/lessons';
 import exercisesRouter from './routes/exercises';
 import progressRouter from './routes/progress';
+import { autoSeedIfEmpty } from './autoSeed';
 
 dotenv.config();
 
@@ -31,8 +32,12 @@ const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/spanis
 
 mongoose
   .connect(MONGODB_URI)
-  .then(() => {
+  .then(async () => {
     console.log('✅ Connected to MongoDB');
+
+    // Auto-seed if database is empty
+    await autoSeedIfEmpty();
+
     app.listen(PORT, () => {
       console.log(`🚀 Server running on port ${PORT}`);
     });
