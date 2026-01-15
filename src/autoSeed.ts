@@ -1,5 +1,6 @@
 import Lesson from './models/Lesson';
 import Exercise from './models/Exercise';
+import { lessonsVocabulary } from './lessonsVocabulary';
 
 const lessonsData = [
   {
@@ -278,8 +279,18 @@ export async function autoSeedIfEmpty() {
     if (count === 0) {
       console.log('📦 Database is empty, seeding data...');
 
-      const lessons = await Lesson.insertMany(lessonsData);
-      console.log('📚 Inserted lessons');
+      // Merge lessons with vocabulary
+      const lessonsWithVocabulary = lessonsData.map(lesson => {
+        const vocabData = lessonsVocabulary.find(v => v.level === lesson.level);
+        return {
+          ...lesson,
+          vocabulary: vocabData?.vocabulary || [],
+          grammarNotes: vocabData?.grammarNotes || '',
+        };
+      });
+
+      const lessons = await Lesson.insertMany(lessonsWithVocabulary);
+      console.log('📚 Inserted lessons with vocabulary');
 
       for (const lesson of lessons) {
         const exercises = generateExercises(lesson._id.toString(), lesson.level);
@@ -294,12 +305,20 @@ export async function autoSeedIfEmpty() {
       const existingLessons = await Lesson.find({}, { level: 1 });
       const existingLevels = new Set(existingLessons.map(l => l.level));
 
-      // Add only new lessons
-      const newLessons = lessonsData.filter(l => !existingLevels.has(l.level));
+      // Add only new lessons with vocabulary
+      const newLessonsData = lessonsData.filter(l => !existingLevels.has(l.level));
+      const newLessonsWithVocabulary = newLessonsData.map(lesson => {
+        const vocabData = lessonsVocabulary.find(v => v.level === lesson.level);
+        return {
+          ...lesson,
+          vocabulary: vocabData?.vocabulary || [],
+          grammarNotes: vocabData?.grammarNotes || '',
+        };
+      });
 
-      if (newLessons.length > 0) {
-        const addedLessons = await Lesson.insertMany(newLessons);
-        console.log(`📚 Added ${addedLessons.length} new lessons`);
+      if (newLessonsWithVocabulary.length > 0) {
+        const addedLessons = await Lesson.insertMany(newLessonsWithVocabulary);
+        console.log(`📚 Added ${addedLessons.length} new lessons with vocabulary`);
 
         for (const lesson of addedLessons) {
           const exercises = generateExercises(lesson._id.toString(), lesson.level);
