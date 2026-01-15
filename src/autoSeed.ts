@@ -82,6 +82,46 @@ const lessonsData = [
     color: '#AA96DA',
     totalExercises: 6,
   },
+  {
+    title: 'מקומות בעיר',
+    description: 'מקומות חשובים בעיר',
+    level: 11,
+    icon: '🏙️',
+    color: '#FCBF49',
+    totalExercises: 6,
+  },
+  {
+    title: 'פעלים בסיסיים',
+    description: 'פעלים נפוצים בספרדית',
+    level: 12,
+    icon: '🏃',
+    color: '#F77F00',
+    totalExercises: 6,
+  },
+  {
+    title: 'תחביבים וספורט',
+    description: 'פעילויות פנאי ותחביבים',
+    level: 13,
+    icon: '⚽',
+    color: '#06D6A0',
+    totalExercises: 5,
+  },
+  {
+    title: 'בבית',
+    description: 'חפצים וחדרים בבית',
+    level: 14,
+    icon: '🏠',
+    color: '#118AB2',
+    totalExercises: 6,
+  },
+  {
+    title: 'רגשות ותחושות',
+    description: 'תיאור רגשות ומצבי רוח',
+    level: 15,
+    icon: '😊',
+    color: '#EF476F',
+    totalExercises: 5,
+  },
 ];
 
 const generateExercises = (lessonId: string, lessonLevel: number) => {
@@ -176,6 +216,54 @@ const generateExercises = (lessonId: string, lessonLevel: number) => {
         { lessonId, type: 'fillInBlank', question: 'Hace ___ hoy', correctAnswer: 'calor', hint: 'חום' },
         { lessonId, type: 'translation', question: 'אביב', correctAnswer: 'Primavera' },
         { lessonId, type: 'multipleChoice', question: 'איך אומרים "שלג" בספרדית?', correctAnswer: 'Nieve', options: ['Nieve', 'Lluvia', 'Sol', 'Viento'] },
+      ];
+
+    case 11: // מקומות בעיר
+      return [
+        { lessonId, type: 'multipleChoice', question: 'איך אומרים "בית ספר" בספרדית?', correctAnswer: 'Escuela', options: ['Escuela', 'Hospital', 'Tienda', 'Museo'] },
+        { lessonId, type: 'translation', question: 'בית חולים', correctAnswer: 'Hospital' },
+        { lessonId, type: 'multipleChoice', question: 'מה המשמעות של "Biblioteca"?', correctAnswer: 'ספרייה', options: ['ספרייה', 'בנק', 'פארק', 'תחנה'] },
+        { lessonId, type: 'fillInBlank', question: 'Voy al ___ para comprar', correctAnswer: 'supermercado', hint: 'סופרמרקט' },
+        { lessonId, type: 'translation', question: 'מסעדה', correctAnswer: 'Restaurante' },
+        { lessonId, type: 'multipleChoice', question: 'איך אומרים "תחנת רכבת" בספרדית?', correctAnswer: 'Estación de tren', options: ['Estación de tren', 'Aeropuerto', 'Calle', 'Plaza'] },
+      ];
+
+    case 12: // פעלים בסיסיים
+      return [
+        { lessonId, type: 'multipleChoice', question: 'איך אומרים "לאכול" בספרדית?', correctAnswer: 'Comer', options: ['Comer', 'Beber', 'Dormir', 'Hablar'] },
+        { lessonId, type: 'translation', question: 'לשתות', correctAnswer: 'Beber' },
+        { lessonId, type: 'multipleChoice', question: 'מה המשמעות של "Caminar"?', correctAnswer: 'ללכת', options: ['ללכת', 'לרוץ', 'לקפוץ', 'לשבת'] },
+        { lessonId, type: 'fillInBlank', question: 'Me gusta ___ música', correctAnswer: 'escuchar', hint: 'להאזין' },
+        { lessonId, type: 'translation', question: 'לישון', correctAnswer: 'Dormir' },
+        { lessonId, type: 'multipleChoice', question: 'איך אומרים "לקרוא" בספרדית?', correctAnswer: 'Leer', options: ['Leer', 'Escribir', 'Ver', 'Pensar'] },
+      ];
+
+    case 13: // תחביבים וספורט
+      return [
+        { lessonId, type: 'multipleChoice', question: 'איך אומרים "כדורגל" בספרדית?', correctAnswer: 'Fútbol', options: ['Fútbol', 'Baloncesto', 'Tenis', 'Natación'] },
+        { lessonId, type: 'translation', question: 'מוסיקה', correctAnswer: 'Música' },
+        { lessonId, type: 'multipleChoice', question: 'מה המשמעות של "Pintura"?', correctAnswer: 'ציור', options: ['ציור', 'ריקוד', 'שחייה', 'קריאה'] },
+        { lessonId, type: 'fillInBlank', question: 'Me encanta jugar al ___', correctAnswer: 'tenis', hint: 'טניס' },
+        { lessonId, type: 'translation', question: 'ריקוד', correctAnswer: 'Baile' },
+      ];
+
+    case 14: // בבית
+      return [
+        { lessonId, type: 'multipleChoice', question: 'איך אומרים "מטבח" בספרדית?', correctAnswer: 'Cocina', options: ['Cocina', 'Baño', 'Dormitorio', 'Sala'] },
+        { lessonId, type: 'translation', question: 'חדר שינה', correctAnswer: 'Dormitorio' },
+        { lessonId, type: 'multipleChoice', question: 'מה המשמעות של "Mesa"?', correctAnswer: 'שולחן', options: ['שולחן', 'כיסא', 'ספה', 'מיטה'] },
+        { lessonId, type: 'fillInBlank', question: 'La comida está en el ___', correctAnswer: 'refrigerador', hint: 'מקרר' },
+        { lessonId, type: 'translation', question: 'חלון', correctAnswer: 'Ventana' },
+        { lessonId, type: 'multipleChoice', question: 'איך אומרים "דלת" בספרדית?', correctAnswer: 'Puerta', options: ['Puerta', 'Pared', 'Techo', 'Piso'] },
+      ];
+
+    case 15: // רגשות ותחושות
+      return [
+        { lessonId, type: 'multipleChoice', question: 'איך אומרים "שמח" בספרדית?', correctAnswer: 'Feliz', options: ['Feliz', 'Triste', 'Enojado', 'Cansado'] },
+        { lessonId, type: 'translation', question: 'עצוב', correctAnswer: 'Triste' },
+        { lessonId, type: 'multipleChoice', question: 'מה המשמעות של "Emocionado"?', correctAnswer: 'מתרגש', options: ['מתרגש', 'עייף', 'כועס', 'מפחד'] },
+        { lessonId, type: 'fillInBlank', question: 'Estoy muy ___ hoy', correctAnswer: 'contento', hint: 'מרוצה' },
+        { lessonId, type: 'translation', question: 'אוהב', correctAnswer: 'Enamorado' },
       ];
 
     default:
